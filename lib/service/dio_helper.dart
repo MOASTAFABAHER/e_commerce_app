@@ -5,7 +5,7 @@ class DioHelper {
 
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://www.bazoka.eraasoft.com/api/',
+      baseUrl: 'https://www.bazoka.eraasoft.com/api',
       receiveDataWhenStatusError: true,
     ));
   }
@@ -13,7 +13,12 @@ class DioHelper {
   static Future<Response> getData({
     required String url,
     Map<String, dynamic>? query,
+    String? token,
   }) async {
+    dio?.options.headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
     return await dio!.get(url, queryParameters: query);
   }
 
@@ -23,23 +28,28 @@ class DioHelper {
     required Map<String, dynamic> data,
     String? token,
   }) {
-    dio!.options.headers = {
-      'content-type': 'application/json',
+    dio?.options.headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'bearer $token',
     };
     return dio!.post(url, queryParameters: query, data: data);
   }
 
-  static Future<Response> putData({
-    required String url,
-    Map<String, dynamic>? query,
-    required Map<String, dynamic> data,
-    String? token,
-  }) {
+  static Future<Response> putData(
+      {required String url,
+      Map<String, dynamic>? query,
+      Map<String, dynamic>? data,
+      String lang = 'ar',
+      String? token}) async {
     dio!.options.headers = {
       'Content-Type': 'application/json',
-      'authorization': 'Bearer $token',
+      'Authorization': '$token'
     };
-    return dio!.post(url, queryParameters: query, data: data);
+    return await dio!.put(
+      url,
+      queryParameters: query,
+      data: data,
+    );
   }
 
   static Future<Response> deleteData(

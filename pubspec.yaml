@@ -57,6 +57,9 @@ dependencies:
   
   #web view
   webview_flutter: ^3.0.4
+  #row Slider 
+  flutter_custom_carousel_slider: ^1.2.0
+
 
 
 

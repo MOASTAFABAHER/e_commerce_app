@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../models/responds/register_responds.dart';
+import '../../../../models/responds/auth/register_responds.dart';
 import '../../../../service/dio_helper.dart';
 import '../../../../service/local/sp__keys.dart';
 import '../../../../service/local/sp_helper.dart';
@@ -30,11 +32,11 @@ class RegisterCubit extends Cubit<RegisterState> {
       registerResponds = RegisterResponds.fromJson(value.data);
       SharedPrefrenceHelper.saveData(
           key: SharedPreferencesKeys.token,
-          value: registerResponds!.data!.accessToken);
+          value: registerResponds?.data?.accessToken);
       print('Suc');
     }).catchError((error) {
       emit(RegisterErrorState());
-      print('Error');
+      print('Error $error');
     });
   }
 }

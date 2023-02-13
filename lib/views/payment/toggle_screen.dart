@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/bloc/Payment/cubit/payment_cubit.dart';
 import 'package:e_commerce_app/config/toast_config.dart';
 import 'package:e_commerce_app/enums/toast_status.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
@@ -6,6 +5,8 @@ import 'package:e_commerce_app/views/payment/ref_screen.dart';
 import 'package:e_commerce_app/views/payment/visa_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/Payment_cubit/cubit/payment_cubit.dart';
 
 class ToggleScreen extends StatelessWidget {
   const ToggleScreen({Key? key}) : super(key: key);

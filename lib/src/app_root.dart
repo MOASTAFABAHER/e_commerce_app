@@ -1,5 +1,8 @@
-import 'package:e_commerce_app/views/auth/register_screen.dart';
-import 'package:e_commerce_app/views/payment/toggle_screen.dart';
+import 'package:e_commerce_app/service/local/sp__keys.dart';
+import 'package:e_commerce_app/service/local/sp_helper.dart';
+import 'package:e_commerce_app/views/auth/login_screen.dart';
+import 'package:e_commerce_app/views/products/home_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,14 +22,18 @@ class AppRoot extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-              appBarTheme: AppBarTheme(
+              appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.black,
+              statusBarColor: Colors.white,
               statusBarIconBrightness: Brightness.dark,
               statusBarBrightness: Brightness.light,
             ),
           )),
-          home: const RegisterScreen(),
+          home: SharedPrefrenceHelper.getData(
+                      key: SharedPreferencesKeys.isFirst.toString()) ==
+                  false
+              ? const LoginScreen()
+              : const OnBoardingScreen(),
         );
       },
     );

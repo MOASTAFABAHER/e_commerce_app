@@ -3,8 +3,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../src/app_colors.dart';
-import 'custom_text.dart';
+import '../../src/app_colors.dart';
+import '../custom_text.dart';
 
 class CustomToggleComponent extends StatelessWidget {
   String text;

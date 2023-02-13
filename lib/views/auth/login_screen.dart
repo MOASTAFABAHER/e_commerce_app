@@ -1,22 +1,24 @@
+import 'package:e_commerce_app/service/local/sp__keys.dart';
+import 'package:e_commerce_app/service/local/sp_helper.dart';
 import 'package:e_commerce_app/views/auth/register_screen.dart';
 import 'package:e_commerce_app/views/payment/toggle_screen.dart';
+import 'package:e_commerce_app/views/products/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../bloc/auth/login/cubit/login_cubit.dart';
+import '../../bloc/auth_cubit/login/cubit/login_cubit.dart';
 import '../../components/custom_button.dart';
 import '../../components/custom_text.dart';
-import '../../components/custom_textform.dart';
+import '../../components/fields/custom_textform.dart';
 import '../../components/logo_component.dart';
-import '../../components/social_icons_component.dart';
+import '../../components/social/social_icons_component.dart';
 import '../../config/toast_config.dart';
 import '../../enums/toast_status.dart';
 import '../../src/app_colors.dart';
 import '../../utils/app_navigator.dart';
-import '../test.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -30,8 +32,7 @@ class LoginScreen extends StatelessWidget {
           if (state is LoginSuccsessState) {
             ToastConfig.showToast(
                 msg: 'Wellcome', toastStates: ToastStates.Success);
-            AppNavigator.appNavigator(context, const ToggleScreen(),
-                isFinished: true);
+            AppNavigator.appNavigator(context, HomeScreen(), isFinished: true);
           }
 
           if (state is LoginErrorState) {
@@ -89,6 +90,11 @@ class LoginScreen extends StatelessWidget {
                     CustomButton(
                       function: () {
                         cubit.userLogin();
+                        SharedPrefrenceHelper.saveData(
+                            key: SharedPreferencesKeys.isFirst.toString(),
+                            value: false);
+                        print(SharedPrefrenceHelper.getData(
+                            key: SharedPreferencesKeys.isFirst.toString()));
                       },
                       colorContainer: AppColors.kBlueColor,
                       radiusCircular: 0,

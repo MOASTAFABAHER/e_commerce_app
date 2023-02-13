@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:onboarding_animation/onboarding_animation.dart';
 
-import '../../components/on_boarding_components.dart';
+import '../../components/on_boarding/on_boarding_components.dart';
 import '../../src/app_colors.dart';
 
 class OnBoardingScreen extends StatelessWidget {

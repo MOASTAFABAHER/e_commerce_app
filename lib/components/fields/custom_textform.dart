@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../src/app_colors.dart';
+import '../../src/app_colors.dart';
 
 class CustomTextForm extends StatefulWidget {
   final String lable;

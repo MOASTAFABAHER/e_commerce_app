@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/bloc/auth/firebase/cubit/firebase_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../bloc/auth_cubit/firebase/cubit/firebase_cubit.dart';
 import 'my_social_circle_avtar.dart';
 
 class SocialIconsComponent extends StatelessWidget {
@@ -16,9 +16,7 @@ class SocialIconsComponent extends StatelessWidget {
     return BlocProvider(
       create: (context) => FirebaseCubit(),
       child: BlocConsumer<FirebaseCubit, FirebaseState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           var cubit = FirebaseCubit.get(context);
           return Row(

@@ -1,10 +1,11 @@
-import 'package:e_commerce_app/bloc/Payment/cubit/payment_cubit.dart';
 import 'package:e_commerce_app/service/local/sp__keys.dart';
 import 'package:e_commerce_app/service/local/sp_helper.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
 import 'package:e_commerce_app/views/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/Payment_cubit/cubit/payment_cubit.dart';
 
 class ReferenceScreen extends StatelessWidget {
   const ReferenceScreen({Key? key}) : super(key: key);

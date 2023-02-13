@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/service/dio_helper.dart';
+import 'package:e_commerce_app/service/local/sp__keys.dart';
 import 'package:e_commerce_app/service/local/sp_helper.dart';
 import 'package:e_commerce_app/service/payment_helper.dart';
 import 'package:e_commerce_app/src/app_root.dart';
@@ -12,4 +13,6 @@ void main() async {
   DioHelper.init();
   SharedPrefrenceHelper.init();
   runApp(const AppRoot());
+  debugPrint(SharedPrefrenceHelper.getData(
+      key: SharedPreferencesKeys.isFirst.toString()));
 }

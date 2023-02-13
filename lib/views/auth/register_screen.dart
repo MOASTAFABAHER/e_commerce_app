@@ -1,24 +1,21 @@
-import 'package:e_commerce_app/bloc/Payment/cubit/k_y_c_cubit.dart';
-import 'package:e_commerce_app/views/auth/register_screen.dart';
 import 'package:e_commerce_app/views/payment/toggle_screen.dart';
+import 'package:e_commerce_app/views/products/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../bloc/auth/login/cubit/login_cubit.dart';
-import '../../bloc/auth/register/cubit/register_cubit.dart';
+import '../../bloc/Payment_cubit/cubit/k_y_c_cubit.dart';
+import '../../bloc/auth_cubit/register/cubit/register_cubit.dart';
 import '../../components/custom_button.dart';
 import '../../components/custom_text.dart';
-import '../../components/custom_textform.dart';
+import '../../components/fields/custom_textform.dart';
 import '../../components/logo_component.dart';
-import '../../components/social_icons_component.dart';
+import '../../components/social/social_icons_component.dart';
 import '../../config/toast_config.dart';
 import '../../enums/toast_status.dart';
 import '../../src/app_colors.dart';
 import '../../utils/app_navigator.dart';
-import '../test.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -41,7 +38,7 @@ class RegisterScreen extends StatelessWidget {
                   if (state is RegisterSuccsessState) {
                     ToastConfig.showToast(
                         msg: 'Welcome', toastStates: ToastStates.Success);
-                    AppNavigator.appNavigator(context, const ToggleScreen(),
+                    AppNavigator.appNavigator(context, HomeScreen(),
                         isFinished: true);
                   }
                   if (state is RegisterErrorState) {
@@ -56,7 +53,7 @@ class RegisterScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        LogoComponent(),
+                        const LogoComponent(),
                         SizedBox(
                           height: 20.h,
                         ),

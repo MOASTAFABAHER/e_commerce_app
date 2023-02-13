@@ -10,4 +10,6 @@ class SharedPreferencesKeys {
 
   static String finalToken = 'Final_token';
   static String refCode = 'ref_code';
+
+  static bool isFirst = true;
 }

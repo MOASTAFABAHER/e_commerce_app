@@ -3,10 +3,10 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../src/app_colors.dart';
-import '../utils/app_navigator.dart';
-import '../views/auth/register_screen.dart';
-import 'custom_button.dart';
+import '../../src/app_colors.dart';
+import '../../utils/app_navigator.dart';
+import '../../views/auth/register_screen.dart';
+import '../custom_button.dart';
 
 class OnBoardingComponet extends StatelessWidget {
   bool isLast = false;

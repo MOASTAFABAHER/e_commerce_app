@@ -146,6 +146,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.1.1"
+  flutter_custom_carousel_slider:
+    dependency: "direct main"
+    description:
+      name: flutter_custom_carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   flutter_facebook_auth:
     dependency: "direct main"
     description:

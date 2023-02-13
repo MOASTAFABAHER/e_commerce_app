@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:e_commerce_app/bloc/Payment/cubit/payment_cubit.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
 import 'package:e_commerce_app/views/auth/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../bloc/Payment_cubit/cubit/payment_cubit.dart';
 import '../../service/local/sp__keys.dart';
 import '../../service/local/sp_helper.dart';
 
