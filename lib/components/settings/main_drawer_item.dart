@@ -13,8 +13,8 @@ class MainDrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // AppNavigator.appNavigator(context, settingsData.widget,
-        //     isFinished: true);
+        AppNavigator.appNavigator(context, settingsData.widget,
+            isFinished: true);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
