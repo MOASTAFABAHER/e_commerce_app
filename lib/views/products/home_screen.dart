@@ -5,8 +5,9 @@ import 'package:e_commerce_app/components/sldier_row/custom_row_slider.dart';
 import 'package:e_commerce_app/models/responds/categories/topic_text.dart';
 
 import 'package:e_commerce_app/src/app_colors.dart';
+import 'package:e_commerce_app/utils/app_navigator.dart';
+import 'package:e_commerce_app/views/settings/List_of_categories_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../components/categories/get_all_categories_list.dart';
@@ -55,7 +56,14 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20),
               child: Column(
                 children: [
-                  TopicText(text: 'Categories'),
+                  TopicText(
+                    text: 'Categories',
+                    function: () {
+                      AppNavigator.appNavigator(
+                          context, const ListOfCategoriesScreen(),
+                          isFinished: true);
+                    },
+                  ),
                   const GetAllCategoriesList(),
                   TopicText(text: 'Best Seller'),
                   const ListOfBestSeller(),

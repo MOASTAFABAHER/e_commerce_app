@@ -7,18 +7,22 @@ import '../../../src/app_colors.dart';
 
 class TopicText extends StatelessWidget {
   String text;
-  TopicText({super.key, required this.text});
+  var function;
+  TopicText({super.key, required this.text, this.function});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5.r),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: CustomText(
-          text: text,
-          fontSize: 20.sp,
-          color: AppColors.kBlueColor,
+    return GestureDetector(
+      onTap: function,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 5.r),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: CustomText(
+            text: text,
+            fontSize: 20.sp,
+            color: AppColors.kBlueColor,
+          ),
         ),
       ),
     );
