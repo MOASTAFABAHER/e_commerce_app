@@ -1,5 +1,7 @@
 import 'package:e_commerce_app/components/products/main_products_container.dart';
 import 'package:e_commerce_app/src/app_colors.dart';
+import 'package:e_commerce_app/utils/app_navigator.dart';
+import 'package:e_commerce_app/views/products/product_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +39,13 @@ class ListOfBestSeller extends StatelessWidget {
                         imageUrl: mydata.image!,
                         name: mydata.name!,
                         price: mydata.price!,
+                        function: () {
+                          AppNavigator.appNavigator(
+                            context,
+                            ProductScreen(id: mydata.id!),
+                            isFinished: true,
+                          );
+                        },
                       );
                     },
                     separatorBuilder: (context, index) {

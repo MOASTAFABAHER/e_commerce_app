@@ -17,7 +17,6 @@ class CustomAppBar extends StatelessWidget {
     return Container(
       color: AppColors.kWhiteColor,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
               onPressed: () {
@@ -25,6 +24,9 @@ class CustomAppBar extends StatelessWidget {
                     isFinished: true);
               },
               icon: const Icon(Icons.arrow_back)),
+          const Spacer(
+            flex: 1,
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: CustomText(
@@ -32,7 +34,13 @@ class CustomAppBar extends StatelessWidget {
               fontSize: 20.sp,
               fontWeight: FontWeight.w500,
             ),
-          )
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.shopping_cart,
+                color: AppColors.kGreyColor,
+              )),
         ],
       ),
     );

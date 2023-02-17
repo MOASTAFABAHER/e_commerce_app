@@ -1,5 +1,7 @@
 import 'package:e_commerce_app/components/products/main_products_container.dart';
 import 'package:e_commerce_app/src/app_colors.dart';
+import 'package:e_commerce_app/utils/app_navigator.dart';
+import 'package:e_commerce_app/views/products/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,6 +40,11 @@ class AllItemGridView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var myData = cubit.getAllProductsRespond.data![index];
                         return MainProductsContainer(
+                            function: () {
+                              AppNavigator.appNavigator(
+                                  context, ProductScreen(id: myData.id!),
+                                  isFinished: true);
+                            },
                             id: myData.id!,
                             imageUrl: myData.image!,
                             name: myData.name!,

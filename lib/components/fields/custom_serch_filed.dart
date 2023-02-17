@@ -4,11 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../src/app_colors.dart';
 
 class CustomSearchField extends StatefulWidget {
+  bool isContact;
   final String lable;
+  int maxLine, minLine;
 
   final TextEditingController? controller;
 
   CustomSearchField({
+    this.maxLine = 1,
+    this.minLine = 1,
+    this.isContact = false,
     required this.lable,
     this.controller,
   });
@@ -27,6 +32,8 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
             color: AppColors.kWhiteColor,
             borderRadius: BorderRadius.circular(25)),
         child: TextFormField(
+          minLines: widget.isContact ? widget.minLine : 1,
+          maxLines: widget.isContact ? widget.maxLine : 1,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter ${widget.lable}';
@@ -35,23 +42,33 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
           },
           controller: widget.controller,
           decoration: InputDecoration(
-              focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kGreyColor)),
-              labelStyle: const TextStyle(color: AppColors.kGreyColor),
-              enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.kGreyColor)),
-              fillColor: AppColors.kWhiteColor,
-              suffixIcon: Icon(
-                Icons.search,
-                color: AppColors.kGreyColor,
-                size: 25.sp,
-              ),
-              border: UnderlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.kBlueColor),
-                  borderRadius: BorderRadius.circular(25)),
-              label: Text(
-                '${widget.lable}',
-              )),
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.kGreyColor)),
+            labelStyle: const TextStyle(color: AppColors.kGreyColor),
+            enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.kGreyColor)),
+            fillColor: AppColors.kWhiteColor,
+            suffixIcon: widget.isContact
+                ? const SizedBox()
+                : Icon(
+                    Icons.search,
+                    color: AppColors.kGreyColor,
+                    size: 25.sp,
+                  ),
+            border: UnderlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.kBlueColor),
+                borderRadius: BorderRadius.circular(25)),
+            label: widget.isContact
+                ? Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      '${widget.lable}',
+                    ),
+                  )
+                : Text(
+                    '${widget.lable}',
+                  ),
+          ),
         ),
       ),
     );

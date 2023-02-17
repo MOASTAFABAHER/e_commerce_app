@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/views/payment/toggle_screen.dart';
 import 'package:e_commerce_app/views/settings/List_of_categories_screen.dart';
 import 'package:e_commerce_app/views/settings/about_us_screen.dart';
+import 'package:e_commerce_app/views/settings/contact_us_screenn.dart';
 import 'package:e_commerce_app/views/settings/test_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ List<SettingsData> myData = [
   SettingsData(
       icon: Icons.local_phone_outlined,
       name: 'Contact us',
-      widget: const TestScreen()),
+      widget: const ContactUsScreen()),
   SettingsData(
       icon: Icons.sd_card_alert_outlined,
       name: 'About us',

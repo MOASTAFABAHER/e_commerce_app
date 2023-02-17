@@ -91,8 +91,8 @@ class LoginScreen extends StatelessWidget {
                       function: () {
                         cubit.userLogin();
                         SharedPrefrenceHelper.saveData(
-                            key: SharedPreferencesKeys.isFirst.toString(),
-                            value: false);
+                            key: SharedPreferencesKeys.isFirst, value: false);
+
                         print(SharedPrefrenceHelper.getData(
                             key: SharedPreferencesKeys.isFirst.toString()));
                       },

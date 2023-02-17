@@ -43,6 +43,14 @@ class HomeScreen extends StatelessWidget {
             lable: 'Search',
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.shopping_cart,
+                color: AppColors.kGreyColor,
+              )),
+        ],
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

@@ -12,7 +12,7 @@ void main() async {
   Paymenthelper.init();
   DioHelper.init();
   SharedPrefrenceHelper.init();
+
+  debugPrint(SharedPrefrenceHelper.getData(key: 'isFirst'));
   runApp(const AppRoot());
-  debugPrint(SharedPrefrenceHelper.getData(
-      key: SharedPreferencesKeys.isFirst.toString()));
 }

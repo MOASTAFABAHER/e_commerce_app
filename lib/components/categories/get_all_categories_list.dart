@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/utils/app_navigator.dart';
+import 'package:e_commerce_app/views/products/products_by_category_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +27,14 @@ class GetAllCategoriesList extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return CategoriesCompoent(
+                      function: () {
+                        AppNavigator.appNavigator(
+                            context,
+                            ProductsBtCategoryScreen(
+                                id: cubit
+                                    .getCategoriesRespond.data![index].id!),
+                            isFinished: true);
+                      },
                       text: cubit.getCategoriesRespond.data![index].name!);
                 },
                 separatorBuilder: (context, index) {

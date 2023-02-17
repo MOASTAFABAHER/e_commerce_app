@@ -7,28 +7,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesCompoent extends StatelessWidget {
   String text;
-  CategoriesCompoent({required this.text});
+  var function;
+  CategoriesCompoent({required this.text, required this.function});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 140.w,
-      height: 70.h,
-      color: AppColors.kGreyColor.withOpacity(0.3),
-      child: Column(
-        children: [
-          Image.network(
-            'https://softlaptop.com/ecdata/stores/IYPUYD5769/image/cache/data/products/1646938408_Dell_G15_5511-500x500.jpg',
-            height: 80.h,
-          ),
-          Expanded(
-            child: CustomText(
-              text: text,
-              maxLines: 1,
-              fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: function,
+      child: Container(
+        width: 140.w,
+        height: 70.h,
+        color: AppColors.kGreyColor.withOpacity(0.3),
+        child: Column(
+          children: [
+            Image.network(
+              'https://softlaptop.com/ecdata/stores/IYPUYD5769/image/cache/data/products/1646938408_Dell_G15_5511-500x500.jpg',
+              height: 80.h,
             ),
-          )
-        ],
+            Expanded(
+              child: CustomText(
+                text: text,
+                maxLines: 1,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
