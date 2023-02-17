@@ -1,14 +1,14 @@
 class ProductIdRespond {
   int? status;
   String? message;
-  Data? data;
+  Product? data;
 
   ProductIdRespond({this.status, this.message, this.data});
 
   ProductIdRespond.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Product.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,7 +22,7 @@ class ProductIdRespond {
   }
 }
 
-class Data {
+class Product {
   int? id;
   String? categoryName;
   String? name;
@@ -31,7 +31,7 @@ class Data {
   String? image;
   int? offer;
 
-  Data(
+  Product(
       {this.id,
       this.categoryName,
       this.name,
@@ -40,7 +40,7 @@ class Data {
       this.image,
       this.offer});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     categoryName = json['category name'];
     name = json['name'];

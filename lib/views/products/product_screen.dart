@@ -1,7 +1,9 @@
 import 'package:e_commerce_app/bloc/products_cubit/get_product_by_id/cubit/get_product_by_id_cubit.dart';
+import 'package:e_commerce_app/components/add_to_cart_button.dart';
 import 'package:e_commerce_app/components/custom_button.dart';
 import 'package:e_commerce_app/components/custom_text.dart';
 import 'package:e_commerce_app/components/settings/custom_app_bar.dart';
+import 'package:e_commerce_app/models/responds/poducts/products_according_to_category_respond.dart';
 import 'package:e_commerce_app/src/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,7 @@ class ProductScreen extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             var cubit = GetProductByIdCubit.get(context);
+            var myData = cubit.productIdRespond.data;
             return state is GetProductByLoadingState
                 ? const Center(
                     child: CircularProgressIndicator(
@@ -48,7 +51,7 @@ class ProductScreen extends StatelessWidget {
                             ),
                             IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.favorite,
                                   color: AppColors.kGreyColor,
                                 )),
@@ -74,13 +77,16 @@ class ProductScreen extends StatelessWidget {
                         const Spacer(flex: 1),
                         Align(
                           alignment: Alignment.bottomRight,
-                          child: CustomButton(
-                              colorContainer: AppColors.kBlueColor,
-                              radiusCircular: 0,
-                              width: 120.w,
-                              hight: 40.h,
-                              textColor: AppColors.kWhiteColor,
-                              text: "Add TO Cart"),
+                          child: AddToCardButton(
+                            product: Product(
+                              price: myData!.price,
+                              name: myData.name,
+                              id: id,
+                            ),
+                            hight: 40.h,
+                            width: 120.w,
+                            radiusCircular: 0,
+                          ),
                         ),
                       ],
                     ),

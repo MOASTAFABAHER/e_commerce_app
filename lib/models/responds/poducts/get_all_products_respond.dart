@@ -1,7 +1,9 @@
+import 'package:e_commerce_app/models/responds/poducts/products_according_to_category_respond.dart';
+
 class GetAllProductsRespond {
   int? status;
   String? message;
-  List<Data>? data;
+  List<Product>? data;
 
   GetAllProductsRespond({this.status, this.message, this.data});
 
@@ -9,9 +11,9 @@ class GetAllProductsRespond {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Product>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new Product.fromJson(v));
       });
     }
   }

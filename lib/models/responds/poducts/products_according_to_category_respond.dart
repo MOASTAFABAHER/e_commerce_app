@@ -1,7 +1,7 @@
 class ProductsAccordingToCategoryRespond {
   int? status;
   String? message;
-  List<Data>? data;
+  List<Product>? data;
 
   ProductsAccordingToCategoryRespond({this.status, this.message, this.data});
 
@@ -9,9 +9,9 @@ class ProductsAccordingToCategoryRespond {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Product>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new Product.fromJson(v));
       });
     }
   }
@@ -27,7 +27,7 @@ class ProductsAccordingToCategoryRespond {
   }
 }
 
-class Data {
+class Product {
   int? id;
   int? categoryId;
   String? name;
@@ -39,7 +39,7 @@ class Data {
   String? createdAt;
   String? updatedAt;
 
-  Data(
+  Product(
       {this.id,
       this.categoryId,
       this.name,
@@ -51,7 +51,7 @@ class Data {
       this.createdAt,
       this.updatedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     categoryId = json['category_id'];
     name = json['name'];

@@ -40,6 +40,7 @@ class AllItemGridView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var myData = cubit.getAllProductsRespond.data![index];
                         return MainProductsContainer(
+                            product: cubit.getAllProductsRespond.data![index],
                             function: () {
                               AppNavigator.appNavigator(
                                   context, ProductScreen(id: myData.id!),

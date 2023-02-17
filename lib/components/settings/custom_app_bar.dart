@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/components/custom_text.dart';
 import 'package:e_commerce_app/src/app_colors.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
+import 'package:e_commerce_app/views/products/cart_screen.dart';
 import 'package:e_commerce_app/views/products/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget {
   String text;
-  CustomAppBar({required this.text});
+  bool isCartScreen;
+  CustomAppBar({required this.text, this.isCartScreen = false});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +37,17 @@ class CustomAppBar extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.shopping_cart,
-                color: AppColors.kGreyColor,
-              )),
+          isCartScreen
+              ? SizedBox()
+              : IconButton(
+                  onPressed: () {
+                    AppNavigator.appNavigator(context, CartScreen(),
+                        isFinished: true);
+                  },
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                    color: AppColors.kGreyColor,
+                  )),
         ],
       ),
     );

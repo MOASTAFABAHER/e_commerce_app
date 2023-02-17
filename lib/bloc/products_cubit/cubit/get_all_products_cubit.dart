@@ -23,6 +23,7 @@ class GetAllProductsCubit extends Cubit<GetAllProductsState> {
                 SharedPrefrenceHelper.getData(key: SharedPreferencesKeys.token))
         .then((value) {
       getAllProductsRespond = GetAllProductsRespond.fromJson(value.data);
+
       print('Suc get ALl products');
       emit(GetAllProductsSucssessState());
     }).catchError((error) {

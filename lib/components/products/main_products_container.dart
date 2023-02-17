@@ -1,15 +1,19 @@
+import 'package:e_commerce_app/components/add_to_cart_button.dart';
 import 'package:e_commerce_app/components/custom_button.dart';
 import 'package:e_commerce_app/components/custom_text.dart';
+import 'package:e_commerce_app/models/responds/poducts/products_according_to_category_respond.dart';
 import 'package:e_commerce_app/src/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainProductsContainer extends StatelessWidget {
+  Product product;
   String imageUrl, name;
   int id, price;
   var function;
   MainProductsContainer(
       {required this.id,
+      required this.product,
       required this.function,
       required this.imageUrl,
       required this.name,
@@ -50,13 +54,11 @@ class MainProductsContainer extends StatelessWidget {
                 const Spacer(
                   flex: 1,
                 ),
-                CustomButton(
-                  colorContainer: AppColors.kBlueColor,
+                AddToCardButton(
+                  hight: 30.h,
                   radiusCircular: 5,
                   width: 130.w,
-                  hight: 30.h,
-                  text: 'Add To Cart',
-                  textColor: AppColors.kWhiteColor,
+                  product: product,
                 ),
                 SizedBox(
                   height: 10.h,

@@ -35,6 +35,7 @@ class ListOfBestSeller extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var mydata = cubit.getAllProductsRespond.data![index];
                       return MainProductsContainer(
+                        product: cubit.getAllProductsRespond.data![index],
                         id: mydata.id!,
                         imageUrl: mydata.image!,
                         name: mydata.name!,

@@ -23,7 +23,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   userRegister() {
     emit(RegisterLoadingState());
-    DioHelper.postData(url: 'register', data: {
+    DioHelper.postData(url: '/register', data: {
       'name': nameController.text,
       'email': emailController.text,
       'password': passController.text,

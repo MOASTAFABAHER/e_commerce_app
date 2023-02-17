@@ -1,4 +1,6 @@
+import 'package:e_commerce_app/views/auth/login_screen.dart';
 import 'package:e_commerce_app/views/payment/toggle_screen.dart';
+import 'package:e_commerce_app/views/products/cart_screen.dart';
 import 'package:e_commerce_app/views/settings/List_of_categories_screen.dart';
 import 'package:e_commerce_app/views/settings/about_us_screen.dart';
 import 'package:e_commerce_app/views/settings/contact_us_screenn.dart';
@@ -19,9 +21,7 @@ class SettingsData {
 
 List<SettingsData> myData = [
   SettingsData(
-      icon: Icons.shopping_cart_outlined,
-      name: 'Cart',
-      widget: const TestScreen()),
+      icon: Icons.shopping_cart_outlined, name: 'Cart', widget: CartScreen()),
   SettingsData(
     icon: Icons.favorite,
     name: 'Wish List',
@@ -44,5 +44,5 @@ List<SettingsData> myData = [
       isLast: true,
       icon: Icons.logout,
       name: 'Log out',
-      widget: const TestScreen()),
+      widget: const LoginScreen()),
 ];

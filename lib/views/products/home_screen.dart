@@ -6,6 +6,7 @@ import 'package:e_commerce_app/models/responds/categories/topic_text.dart';
 
 import 'package:e_commerce_app/src/app_colors.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
+import 'package:e_commerce_app/views/products/cart_screen.dart';
 import 'package:e_commerce_app/views/settings/List_of_categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,10 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                AppNavigator.appNavigator(context, CartScreen(),
+                    isFinished: true);
+              },
               icon: const Icon(
                 Icons.shopping_cart,
                 color: AppColors.kGreyColor,
