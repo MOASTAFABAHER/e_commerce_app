@@ -5,6 +5,7 @@ import 'package:e_commerce_app/views/payment/ref_screen.dart';
 import 'package:e_commerce_app/views/payment/visa_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../bloc/Payment_cubit/cubit/payment_cubit.dart';
 
@@ -55,11 +56,11 @@ class ToggleScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(height: 15.0),
+                              SizedBox(height: 15.h),
                               Text(
                                 'Payment with Ref code',
                                 style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -89,7 +90,7 @@ class ToggleScreen extends StatelessWidget {
                               Text(
                                 'Payment with visa',
                                 style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 20.0.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -98,7 +99,7 @@ class ToggleScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10.0),
+                    SizedBox(height: 10.h),
                   ],
                 ),
               ),

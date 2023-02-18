@@ -5,7 +5,7 @@ class Paymenthelper {
 
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://accept.paymob.com/api/',
+      baseUrl: 'https://accept.paymob.com/api',
       receiveDataWhenStatusError: true,
     ));
   }

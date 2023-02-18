@@ -15,7 +15,7 @@ class KYCCubit extends Cubit<KYCState> {
   AuthRequestModel? authTokenModel;
   Future<void> getAuthToken() async {
     emit(KYCLoadingState());
-    Paymenthelper.postData(url: 'auth/tokens', data: {
+    Paymenthelper.postData(url: '/auth/tokens', data: {
       'api_key': SharedPreferencesKeys.apiKeyPayment,
     }).then((value) {
       authTokenModel = AuthRequestModel.fromJson(value.data);

@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/views/auth/login_screen.dart';
 import 'package:e_commerce_app/views/payment/toggle_screen.dart';
 import 'package:e_commerce_app/views/products/cart_screen.dart';
+import 'package:e_commerce_app/views/products/whis_list_screen.dart';
 import 'package:e_commerce_app/views/settings/List_of_categories_screen.dart';
 import 'package:e_commerce_app/views/settings/about_us_screen.dart';
 import 'package:e_commerce_app/views/settings/contact_us_screenn.dart';
@@ -23,9 +24,7 @@ List<SettingsData> myData = [
   SettingsData(
       icon: Icons.shopping_cart_outlined, name: 'Cart', widget: CartScreen()),
   SettingsData(
-    icon: Icons.favorite,
-    name: 'Wish List',
-  ),
+      icon: Icons.favorite, name: 'Wish List', widget: WishListScreen()),
   SettingsData(
       icon: Icons.card_travel, name: 'My Orders', widget: const TestScreen()),
   SettingsData(

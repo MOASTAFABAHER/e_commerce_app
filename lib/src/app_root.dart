@@ -1,7 +1,9 @@
+import 'package:e_commerce_app/bloc/favorite_cubit/cubit/favorite_cubit.dart';
 import 'package:e_commerce_app/bloc/products_cubit/add_to_cart/cubit/add_to_cart_cubit.dart';
 import 'package:e_commerce_app/service/local/sp__keys.dart';
 import 'package:e_commerce_app/service/local/sp_helper.dart';
 import 'package:e_commerce_app/views/auth/login_screen.dart';
+import 'package:e_commerce_app/views/payment/toggle_screen.dart';
 import 'package:e_commerce_app/views/products/home_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -21,8 +23,11 @@ class AppRoot extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider(
-          create: (context) => AddToCartCubit(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (buildContext) => AddToCartCubit()),
+            BlocProvider(create: (buildContext) => FavoriteCubit())
+          ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(

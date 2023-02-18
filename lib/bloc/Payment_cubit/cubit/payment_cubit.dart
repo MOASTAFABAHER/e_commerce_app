@@ -22,11 +22,11 @@ class PaymentCubit extends Cubit<PaymentState> {
     required String phone,
   }) async {
     emit(PaymentOrderLoadingState());
-    Paymenthelper.postData(url: "ecommerce/orders", data: {
+    Paymenthelper.postData(url: "/ecommerce/orders", data: {
       'auth_token': SharedPrefrenceHelper.getData(
           key: SharedPreferencesKeys.apiPaymentToken),
       "delivery_needed": "false",
-      "amount_cents": price,
+      "amount_cents": 10,
       "currency": "EGP",
       "items": [],
     }).then((value) {
@@ -57,31 +57,31 @@ class PaymentCubit extends Cubit<PaymentState> {
   ) async {
     emit(PaymentRequestLoadingState());
     Paymenthelper.postData(
-      url: 'acceptance/payment_keys',
+      url: '/acceptance/payment_keys',
       data: {
         "auth_token": SharedPrefrenceHelper.getData(
             key: SharedPreferencesKeys.apiPaymentToken),
-        "amount_cents": priceOrder,
+        "amount_cents": "EGP",
         "expiration": 3600,
         "order_id": SharedPrefrenceHelper.getData(
             key: SharedPreferencesKeys.paymentOrderId),
         "billing_data": {
           "apartment": "NA",
-          "email": email,
+          "email": "mostafa@gmail.com",
           "floor": "NA",
-          "first_name": firstName,
+          "first_name": "mostafa",
           "street": "NA",
           "building": "NA",
-          "phone_number": phone,
+          "phone_number": '01000694166',
           "shipping_method": "NA",
           "postal_code": "NA",
           "city": "NA",
           "country": "NA",
-          "last_name": lastName,
+          "last_name": "baba",
           "state": "NA"
         },
         "currency": "EGP",
-        "integration_id": SharedPreferencesKeys.integrationIdCard,
+        "integration_id": '3384667',
         "lock_order_when_paid": "false"
       },
     ).then((value) {

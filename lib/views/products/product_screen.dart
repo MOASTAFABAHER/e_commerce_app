@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/bloc/favorite_cubit/cubit/favorite_cubit.dart';
+import 'package:e_commerce_app/bloc/favorite_cubit/is_favorite_cubit/cubit/is_favorite_check_cubit.dart';
 import 'package:e_commerce_app/bloc/products_cubit/get_product_by_id/cubit/get_product_by_id_cubit.dart';
 import 'package:e_commerce_app/components/add_to_cart_button.dart';
 import 'package:e_commerce_app/components/custom_button.dart';
@@ -5,21 +7,30 @@ import 'package:e_commerce_app/components/custom_text.dart';
 import 'package:e_commerce_app/components/settings/custom_app_bar.dart';
 import 'package:e_commerce_app/models/responds/poducts/products_according_to_category_respond.dart';
 import 'package:e_commerce_app/src/app_colors.dart';
+import 'package:e_commerce_app/utils/app_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProductScreen extends StatelessWidget {
+import '../../config/toast_config.dart';
+import '../../enums/toast_status.dart';
+
+class ProductScreen extends StatefulWidget {
   int id;
   ProductScreen({required this.id});
 
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kWhiteColor,
       body: SafeArea(
           child: BlocProvider(
-        create: (context) => GetProductByIdCubit()..getProduct(id: id),
+        create: (context) => GetProductByIdCubit()..getProduct(id: widget.id),
         child: BlocConsumer<GetProductByIdCubit, GetProductByIdState>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -49,12 +60,70 @@ class ProductScreen extends StatelessWidget {
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                             ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: AppColors.kGreyColor,
-                                )),
+                            BlocConsumer<FavoriteCubit, FavoriteState>(
+                              listener: (context, state) {
+                                if (state is AddFavoriteAllReadyAddedState) {
+                                  ToastConfig.showToast(
+                                      msg: "Allready Added",
+                                      toastStates: ToastStates.Warning);
+                                }
+                                if (state is AddFavoriteSucssesState) {
+                                  ToastConfig.showToast(
+                                      msg: "Added",
+                                      toastStates: ToastStates.Success);
+                                }
+                                if (state is AddFavoriteErrorState) {
+                                  ToastConfig.showToast(
+                                      msg: "Error",
+                                      toastStates: ToastStates.Error);
+                                }
+                              },
+                              builder: (context, state) {
+                                var cubitFavorite = FavoriteCubit.get(context);
+                                return BlocProvider(
+                                  create: (context) => IsFavoriteCheckCubit()
+                                    ..isFavoriteCheck(
+                                      favoriteList: cubitFavorite.favoriteList,
+                                      id: widget.id,
+                                    ),
+                                  child: BlocConsumer<IsFavoriteCheckCubit,
+                                      IsFavoriteCheckState>(
+                                    listener: (context, state) {
+                                      // TODO: implement listener
+                                    },
+                                    builder: (context, state) {
+                                      var check =
+                                          IsFavoriteCheckCubit.get(context);
+                                      return IconButton(
+                                          onPressed: () {
+                                            if (check.isFavorite) {
+                                              cubitFavorite.removeFavorite(
+                                                  id: myData!.id!);
+                                              check.isFavorite = false;
+                                            } else {
+                                              cubitFavorite
+                                                  .addToFavorite(Product(
+                                                name: myData!.name,
+                                                id: myData.id,
+                                                price: myData.price,
+                                              ));
+                                              check.isFavoriteCheck(
+                                                  id: myData.id!,
+                                                  favoriteList: cubitFavorite
+                                                      .favoriteList);
+                                            }
+                                          },
+                                          icon: Icon(
+                                            Icons.favorite,
+                                            color: check.isFavorite
+                                                ? AppColors.kRedColor
+                                                : AppColors.kGreyColor,
+                                          ));
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
                             const Spacer(
                               flex: 1,
                             ),
@@ -81,7 +150,7 @@ class ProductScreen extends StatelessWidget {
                             product: Product(
                               price: myData!.price,
                               name: myData.name,
-                              id: id,
+                              id: widget.id,
                             ),
                             hight: 40.h,
                             width: 120.w,
