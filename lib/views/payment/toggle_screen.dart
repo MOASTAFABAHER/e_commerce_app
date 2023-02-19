@@ -15,11 +15,14 @@ class ToggleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PaymentCubit(),
+      create: (context) => PaymentCubit()
+        ..getOrderRegistrationID(
+            price: "", firstName: "", lastName: "", email: "", phone: "")
+        ..getPaymentRequest("", "", "", "", ""),
       child: SafeArea(
         child: BlocConsumer<PaymentCubit, PaymentState>(
           listener: (context, state) {
-            if (state is PaymentRefCodeSucssesStates) {
+            if (state is PaymentRefCodeSuccessStates) {
               ToastConfig.showToast(
                   msg: 'Sucsses get ref code ',
                   toastStates: ToastStates.Success);
@@ -56,6 +59,8 @@ class ToggleScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              Image.network(
+                                  'https://cdn-icons-png.flaticon.com/128/4090/4090458.png'),
                               SizedBox(height: 15.h),
                               Text(
                                 'Payment with Ref code',
@@ -87,6 +92,11 @@ class ToggleScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              Image.network(
+                                  'https://cdn-icons-png.flaticon.com/128/349/349221.png'),
+                              const SizedBox(
+                                height: 10,
+                              ),
                               Text(
                                 'Payment with visa',
                                 style: TextStyle(

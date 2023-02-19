@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:e_commerce_app/service/local/sp__keys.dart';
+import 'package:e_commerce_app/components/custom_text.dart';
+import 'package:e_commerce_app/src/app_colors.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
 import 'package:e_commerce_app/views/auth/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../src/api_constant.dart';
 
 class VisaScreen extends StatefulWidget {
   const VisaScreen({Key? key}) : super(key: key);
@@ -31,18 +35,31 @@ class _VisaScreenState extends State<VisaScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(actions: [
-          IconButton(
-            onPressed: () {
-              paymentExitApp(context);
-            },
-            icon: const Icon(
-              Icons.exit_to_app,
+        backgroundColor: AppColors.kWhiteColor,
+        appBar: AppBar(
+            elevation: 0,
+            centerTitle: true,
+            title: CustomText(
+              fontWeight: FontWeight.bold,
+              fontSize: 22.sp,
+              text: "Payment",
+              color: AppColors.kBlackColor,
             ),
-          )
-        ]),
+            backgroundColor: AppColors.kWhiteColor,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  paymentExitApp(context);
+                },
+                icon: const Icon(
+                  Icons.exit_to_app,
+                  color: AppColors.kBlackColor,
+                ),
+              )
+            ]),
         body: WebView(
-          initialUrl: SharedPreferencesKeys.visaUrl,
+          initialUrl:
+              'https://accept.paymob.com/api/acceptance/iframes/730755?payment_token=${ApiContest.finalToken}',
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
@@ -100,7 +117,8 @@ class _VisaScreenState extends State<VisaScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                AppNavigator.appNavigator(context, LoginScreen(),
+                Navigator.pop(context);
+                AppNavigator.appNavigator(context, const LoginScreen(),
                     isFinished: true);
               },
               child: const Text('Yes'),

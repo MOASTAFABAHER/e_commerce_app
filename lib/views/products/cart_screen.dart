@@ -91,7 +91,11 @@ class CartScreen extends StatelessWidget {
                               ),
                             ),
                             CustomButton(
-                                function: () {},
+                                function: () {
+                                  AppNavigator.appNavigator(
+                                      context, const ToggleScreen(),
+                                      isFinished: true);
+                                },
                                 textColor: AppColors.kWhiteColor,
                                 fontWeight: FontWeight.bold,
                                 colorContainer: AppColors.kBlueColor,

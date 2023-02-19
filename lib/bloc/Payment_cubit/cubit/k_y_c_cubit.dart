@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/service/local/sp_helper.dart';
+import 'package:e_commerce_app/src/api_constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -16,15 +17,11 @@ class KYCCubit extends Cubit<KYCState> {
   Future<void> getAuthToken() async {
     emit(KYCLoadingState());
     Paymenthelper.postData(url: '/auth/tokens', data: {
-      'api_key': SharedPreferencesKeys.apiKeyPayment,
+      'api_key': ApiContest.paymentApiKey,
     }).then((value) {
       authTokenModel = AuthRequestModel.fromJson(value.data);
-      SharedPrefrenceHelper.saveData(
-          key: SharedPreferencesKeys.apiPaymentToken,
-          value: authTokenModel!.token);
+      ApiContest.paymentFirstToken = authTokenModel!.token;
       print('The token 🍅');
-      print(SharedPrefrenceHelper.getData(
-          key: SharedPreferencesKeys.apiPaymentToken));
       emit(KYCSucssesState());
     }).catchError((error) {
       print('Error in auth token 🤦‍♂️');

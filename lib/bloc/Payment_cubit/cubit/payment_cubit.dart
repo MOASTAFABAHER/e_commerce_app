@@ -3,6 +3,7 @@ import 'package:e_commerce_app/models/auth_request_model.dart';
 import 'package:e_commerce_app/service/local/sp__keys.dart';
 import 'package:e_commerce_app/service/local/sp_helper.dart';
 import 'package:e_commerce_app/service/payment_helper.dart';
+import 'package:e_commerce_app/src/api_constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -21,29 +22,64 @@ class PaymentCubit extends Cubit<PaymentState> {
     required String email,
     required String phone,
   }) async {
-    emit(PaymentOrderLoadingState());
-    Paymenthelper.postData(url: "/ecommerce/orders", data: {
-      'auth_token': SharedPrefrenceHelper.getData(
-          key: SharedPreferencesKeys.apiPaymentToken),
+    emit(PaymentOrderIdLoadingStates());
+    print(ApiContest.paymentFirstToken);
+    Paymenthelper.postData(url: ApiContest.getOrderId, data: {
+      "auth_token": ApiContest.paymentFirstToken,
       "delivery_needed": "false",
-      "amount_cents": 10,
+      "amount_cents": "1",
       "currency": "EGP",
-      "items": [],
+      "items": [
+        {
+          "name": "ASC1515",
+          "amount_cents": "500000",
+          "description": "Smart Watch",
+          "quantity": "1"
+        },
+        {
+          "name": "ERT6565",
+          "amount_cents": "200000",
+          "description": "Power Bank",
+          "quantity": "1"
+        }
+      ],
+      "shipping_data": {
+        "apartment": "803",
+        "email": "claudette09@exa.com",
+        "floor": "42",
+        "first_name": "Clifford",
+        "street": "Ethan Land",
+        "building": "8028",
+        "phone_number": "+86(8)9135210487",
+        "postal_code": "01898",
+        "extra_description": "8 Ram , 128 Giga",
+        "city": "Jaskolskiburgh",
+        "country": "CR",
+        "last_name": "Nicolas",
+        "state": "Utah"
+      },
+      "shipping_details": {
+        "notes": " test",
+        "number_of_packages": 1,
+        "weight": 1,
+        "weight_unit": "Kilogram",
+        "length": 1,
+        "width": 1,
+        "height": 1,
+        "contents": "product of some sorts"
+      }
     }).then((value) {
       OrderRegistrationModel orderRegistrationModel =
           OrderRegistrationModel.fromJson(value.data);
-      SharedPrefrenceHelper.saveData(
-          key: SharedPreferencesKeys.paymentOrderId,
-          value: orderRegistrationModel.id.toString());
+      ApiContest.paymentOrderId = orderRegistrationModel.id.toString();
       getPaymentRequest(price, firstName, lastName, email, phone);
-      print('The order id 🍅 =${SharedPrefrenceHelper.getData(
-        key: SharedPreferencesKeys.paymentOrderId,
-      )}');
-      emit(PaymentLoadingState());
+      print('The order id 🍅 =${ApiContest.paymentOrderId}');
+      emit(PaymentOrderIdSuccessStates());
     }).catchError((error) {
+      print('Error $error');
       print('Error in order id 🤦‍♂️');
       emit(
-        PaymentErrorState(),
+        PaymentOrderIdErrorStates(error.toString()),
       );
     });
   }
@@ -55,30 +91,28 @@ class PaymentCubit extends Cubit<PaymentState> {
     String email,
     String phone,
   ) async {
-    emit(PaymentRequestLoadingState());
+    emit(PaymentRequestTokenLoadingStates());
     Paymenthelper.postData(
-      url: '/acceptance/payment_keys',
+      url: ApiContest.getPaymentRequest,
       data: {
-        "auth_token": SharedPrefrenceHelper.getData(
-            key: SharedPreferencesKeys.apiPaymentToken),
-        "amount_cents": "EGP",
+        "auth_token": ApiContest.paymentFirstToken,
+        "amount_cents": "100",
         "expiration": 3600,
-        "order_id": SharedPrefrenceHelper.getData(
-            key: SharedPreferencesKeys.paymentOrderId),
+        "order_id": ApiContest.paymentOrderId,
         "billing_data": {
-          "apartment": "NA",
-          "email": "mostafa@gmail.com",
-          "floor": "NA",
-          "first_name": "mostafa",
-          "street": "NA",
-          "building": "NA",
-          "phone_number": '01000694166',
-          "shipping_method": "NA",
-          "postal_code": "NA",
-          "city": "NA",
-          "country": "NA",
-          "last_name": "baba",
-          "state": "NA"
+          "apartment": "803",
+          "email": "claudette09@exa.com",
+          "floor": "42",
+          "first_name": "Clifford",
+          "street": "Ethan Land",
+          "building": "8028",
+          "phone_number": "+86(8)9135210487",
+          "shipping_method": "PKG",
+          "postal_code": "01898",
+          "city": "Jaskolskiburgh",
+          "country": "CR",
+          "last_name": "Nicolas",
+          "state": "Utah"
         },
         "currency": "EGP",
         "integration_id": '3384667',
@@ -87,46 +121,34 @@ class PaymentCubit extends Cubit<PaymentState> {
     ).then((value) {
       PaymentRequestModel paymentRequestModel =
           PaymentRequestModel.fromJson(value.data);
-      SharedPrefrenceHelper.saveData(
-          key: SharedPreferencesKeys.finalToken,
-          value: paymentRequestModel.token);
-      print('Final token 🚀 ${SharedPrefrenceHelper.getData(
-        key: SharedPreferencesKeys.finalToken,
-      )}');
-      emit(PaymentRequestSucssesState());
+      ApiContest.finalToken = paymentRequestModel.token;
+      print('Final token 🚀 ${ApiContest.finalToken}');
+      emit(PaymentRequestTokenSuccessStates());
     }).catchError((error) {
       print('Error in final token 🤦‍♂️');
-      print('Error $error');
       emit(
-        PaymentRequestErrorState(),
+        PaymentRequestTokenErrorStates(error.toString()),
       );
     });
   }
 
   Future getRefCode() async {
-    emit(PaymentRefCodeLoadingStates());
     Paymenthelper.postData(
-      url: 'acceptance/payments/pay',
+      url: ApiContest.getRefCode,
       data: {
         "source": {
           "identifier": "AGGREGATOR",
           "subtype": "AGGREGATOR",
         },
-        "payment_token": SharedPrefrenceHelper.getData(
-            key: SharedPrefrenceHelper.getData(
-                key: SharedPreferencesKeys.finalToken)),
+        "payment_token": ApiContest.finalToken,
       },
     ).then((value) {
-      SharedPrefrenceHelper.saveData(
-          key: SharedPreferencesKeys.refCode,
-          value: value.data['id'].toString());
-      print('The ref code 🍅${SharedPrefrenceHelper.getData(
-        key: SharedPreferencesKeys.refCode,
-      )}');
-      emit(PaymentRefCodeSucssesStates());
+      ApiContest.refCode = value.data['id'].toString();
+      print('The ref code 🍅${ApiContest.refCode}');
+      emit(PaymentRefCodeSuccessStates());
     }).catchError((error) {
       print("Error in ref code 🤦‍♂️");
-      emit(PaymentRefCodeErrorStates());
+      emit(PaymentRefCodeErrorStates(error.toString()));
     });
   }
 }
