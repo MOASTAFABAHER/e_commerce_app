@@ -15,13 +15,13 @@ part 'payment_state.dart';
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit() : super(PaymentInitial());
   static PaymentCubit get(context) => BlocProvider.of(context);
-  Future getOrderRegistrationID({
-    required String price,
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String phone,
-  }) async {
+  Future getOrderRegistrationID(
+      {required String price,
+      required String firstName,
+      required String lastName,
+      required String email,
+      required String phone,
+      required String address}) async {
     emit(PaymentOrderIdLoadingStates());
     print(ApiContest.paymentFirstToken);
     Paymenthelper.postData(url: ApiContest.getOrderId, data: {
@@ -45,17 +45,17 @@ class PaymentCubit extends Cubit<PaymentState> {
       ],
       "shipping_data": {
         "apartment": "803",
-        "email": "claudette09@exa.com",
+        "email": email,
         "floor": "42",
-        "first_name": "Clifford",
-        "street": "Ethan Land",
+        "first_name": firstName,
+        "street": address,
         "building": "8028",
-        "phone_number": "+86(8)9135210487",
+        "phone_number": phone,
         "postal_code": "01898",
         "extra_description": "8 Ram , 128 Giga",
         "city": "Jaskolskiburgh",
         "country": "CR",
-        "last_name": "Nicolas",
+        "last_name": lastName,
         "state": "Utah"
       },
       "shipping_details": {
@@ -72,7 +72,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       OrderRegistrationModel orderRegistrationModel =
           OrderRegistrationModel.fromJson(value.data);
       ApiContest.paymentOrderId = orderRegistrationModel.id.toString();
-      getPaymentRequest(price, firstName, lastName, email, phone);
+      getPaymentRequest(price, firstName, lastName, email, phone, address);
       print('The order id 🍅 =${ApiContest.paymentOrderId}');
       emit(PaymentOrderIdSuccessStates());
     }).catchError((error) {
@@ -84,13 +84,8 @@ class PaymentCubit extends Cubit<PaymentState> {
     });
   }
 
-  Future<void> getPaymentRequest(
-    String priceOrder,
-    String firstName,
-    String lastName,
-    String email,
-    String phone,
-  ) async {
+  Future<void> getPaymentRequest(String priceOrder, String firstName,
+      String lastName, String email, String phone, String address) async {
     emit(PaymentRequestTokenLoadingStates());
     Paymenthelper.postData(
       url: ApiContest.getPaymentRequest,
@@ -101,17 +96,17 @@ class PaymentCubit extends Cubit<PaymentState> {
         "order_id": ApiContest.paymentOrderId,
         "billing_data": {
           "apartment": "803",
-          "email": "claudette09@exa.com",
+          "email": email,
           "floor": "42",
-          "first_name": "Clifford",
+          "first_name": firstName,
           "street": "Ethan Land",
           "building": "8028",
-          "phone_number": "+86(8)9135210487",
+          "phone_number": phone,
           "shipping_method": "PKG",
           "postal_code": "01898",
           "city": "Jaskolskiburgh",
           "country": "CR",
-          "last_name": "Nicolas",
+          "last_name": lastName,
           "state": "Utah"
         },
         "currency": "EGP",

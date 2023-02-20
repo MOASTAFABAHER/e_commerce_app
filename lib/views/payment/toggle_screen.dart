@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_commerce_app/config/toast_config.dart';
 import 'package:e_commerce_app/enums/toast_status.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
@@ -10,15 +12,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../bloc/Payment_cubit/cubit/payment_cubit.dart';
 
 class ToggleScreen extends StatelessWidget {
-  const ToggleScreen({Key? key}) : super(key: key);
+  String firstName, lastName, email, phone, address;
+  ToggleScreen(
+      {Key? key,
+      required this.email,
+      required this.address,
+      required this.firstName,
+      required this.lastName,
+      required this.phone})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PaymentCubit()
         ..getOrderRegistrationID(
-            price: "", firstName: "", lastName: "", email: "", phone: "")
-        ..getPaymentRequest("", "", "", "", ""),
+            address: address,
+            price: "",
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone)
+        ..getPaymentRequest(
+            'priceOrder', firstName, lastName, email, phone, address),
       child: SafeArea(
         child: BlocConsumer<PaymentCubit, PaymentState>(
           listener: (context, state) {

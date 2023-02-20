@@ -6,6 +6,7 @@ import 'package:e_commerce_app/components/settings/custom_app_bar.dart';
 import 'package:e_commerce_app/src/app_colors.dart';
 import 'package:e_commerce_app/utils/app_navigator.dart';
 import 'package:e_commerce_app/views/payment/toggle_screen.dart';
+import 'package:e_commerce_app/views/products/create_order_screen.dart';
 import 'package:e_commerce_app/views/products/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -93,7 +94,7 @@ class CartScreen extends StatelessWidget {
                             CustomButton(
                                 function: () {
                                   AppNavigator.appNavigator(
-                                      context, const ToggleScreen(),
+                                      context, CreateOrderScreen(),
                                       isFinished: true);
                                 },
                                 textColor: AppColors.kWhiteColor,
